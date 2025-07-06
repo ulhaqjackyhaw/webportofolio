@@ -1,0 +1,16 @@
+{
+  "app": {
+    "[project]/src/app/_not-found/page": [
+      "static/media/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuI6fAZ9hiJ_Ek__EeA-s.p.c2836950.woff2"
+    ],
+    "[project]/src/app/page": [
+      "static/media/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuI6fAZ9hiJ_Ek__EeA-s.p.c2836950.woff2"
+    ],
+    "[project]/src/app/starx-ai/page": [
+      "static/media/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuI6fAZ9hiJ_Ek__EeA-s.p.c2836950.woff2"
+    ]
+  },
+  "appUsingSizeAdjust": true,
+  "pages": {},
+  "pagesUsingSizeAdjust": false
+}

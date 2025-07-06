@@ -1,0 +1,17 @@
+{
+  "[project]/src/libs/GSAPAnimation.jsx [app-client] (ecmascript, next/dynamic entry)": {
+    "id": "[project]/src/libs/GSAPAnimation.jsx [app-client] (ecmascript, next/dynamic entry)",
+    "files": [
+      "static/chunks/node_modules_89020606._.js",
+      "static/chunks/src_libs_GSAPAnimation_jsx_7a3676ff._.js",
+      "static/chunks/src_libs_GSAPAnimation_jsx_ccf0ea86._.js"
+    ]
+  },
+  "[project]/src/components/Theme/ThemeProviders.jsx [app-client] (ecmascript, next/dynamic entry)": {
+    "id": "[project]/src/components/Theme/ThemeProviders.jsx [app-client] (ecmascript, next/dynamic entry)",
+    "files": [
+      "static/chunks/_5785837d._.js",
+      "static/chunks/src_components_Theme_ThemeProviders_jsx_406a8fea._.js"
+    ]
+  }
+}

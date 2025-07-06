@@ -2,7 +2,7 @@ import Header from "@/components/Header/Header";
 import Hero from "@/components/Hero/Hero";
 import About from "@/components/About/About";
 import Skill from "@/components/Skill/Skill";
-// import Work from "@/components/Project/ProjectCard";
+import Work from "@/components/Project/ProjectCard";
 import Certificate from "@/components/Certificate/Certificate";
 import Contact from "@/components/Contact/Contact";
 import Footer from "@/components/Footer/Footer";
@@ -17,7 +17,7 @@ export default function Home() {
         <Hero />
         <About />
         <Skill />
-        {/* <Work /> */}
+        <Work />
         <Certificate />
         <Contact />
       </main>

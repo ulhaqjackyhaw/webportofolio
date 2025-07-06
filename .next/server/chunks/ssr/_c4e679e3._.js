@@ -535,64 +535,113 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$Skill$2
 ;
 const skillItem = [
     {
-        title: "Language Programming",
+        title: "Programming Language",
         items: [
             {
                 imgSrc: '/images/javascript.svg',
                 label: 'JavaScript',
-                desc: 'Language Programming',
+                desc: 'Programming Language',
                 progress: '52'
-            }
-        ]
-    },
-    {
-        title: "Styling",
-        items: [
+            },
             {
-                imgSrc: '/images/tailwindcss.svg',
-                label: 'TailwindCSS',
-                desc: 'User Interface',
-                progress: '27'
-            }
-        ]
-    },
-    {
-        title: "Web Server",
-        items: [
+                imgSrc: '/images/php.svg',
+                label: 'PHP',
+                desc: 'Programming Language',
+                progress: '45'
+            },
             {
-                imgSrc: '/images/nodejs.svg',
-                label: 'NodeJS',
-                desc: 'Web Server',
-                progress: '15'
-            }
-        ]
-    },
-    {
-        title: "Framework",
-        items: [
-            {
-                imgSrc: '/images/react.svg',
-                label: 'React',
-                desc: 'Framework',
+                imgSrc: '/images/cpp.svg',
+                label: 'C++',
+                desc: 'Programming Language',
                 progress: '40'
             },
+            {
+                imgSrc: '/images/c.png',
+                label: 'C',
+                desc: 'Programming Language',
+                progress: '38'
+            },
+            {
+                imgSrc: '/images/dart.svg',
+                label: 'Dart',
+                desc: 'Programming Language',
+                progress: '35'
+            },
+            {
+                imgSrc: '/images/python.svg',
+                label: 'Python',
+                desc: 'Programming Language',
+                progress: '30'
+            }
+        ]
+    },
+    {
+        title: "Framework & Library",
+        items: [
             {
                 imgSrc: '/images/flutter.svg',
                 label: 'Flutter',
                 desc: 'Framework',
-                progress: '35'
+                progress: '40'
+            },
+            {
+                imgSrc: '/images/react.svg',
+                label: 'React Js',
+                desc: 'Library',
+                progress: '40'
+            },
+            {
+                imgSrc: '/images/nextjs.svg',
+                label: 'Next Js',
+                desc: 'Library',
+                progress: '40'
+            },
+            {
+                imgSrc: '/images/laravel.svg',
+                label: 'Laravel',
+                desc: 'Framework',
+                progress: '40'
+            },
+            {
+                imgSrc: '/images/bootstrap.png',
+                label: 'Bootstrap',
+                desc: 'Framework',
+                progress: '30'
+            },
+            {
+                imgSrc: '/images/jquery.jpeg',
+                label: 'jQuery',
+                desc: 'Library',
+                progress: '28'
             },
             {
                 imgSrc: '/images/flask.svg',
                 label: 'Flask',
                 desc: 'Framework',
                 progress: '25'
+            }
+        ]
+    },
+    {
+        title: "Markup & Styling",
+        items: [
+            {
+                imgSrc: '/images/html.png',
+                label: 'HTML',
+                desc: 'Markup Language',
+                progress: '50'
             },
             {
-                imgSrc: '/images/laravel.svg',
-                label: 'Laravel',
-                desc: 'Framework',
-                progress: '30'
+                imgSrc: '/images/css.png',
+                label: 'CSS',
+                desc: 'Styling Language',
+                progress: '45'
+            },
+            {
+                imgSrc: '/images/tailwindcss.svg',
+                label: 'TailwindCSS',
+                desc: 'CSS Framework',
+                progress: '27'
             }
         ]
     },
@@ -600,31 +649,72 @@ const skillItem = [
         title: "Database",
         items: [
             {
+                imgSrc: '/images/mysql.png',
+                label: 'MySQL',
+                desc: 'Relational Database',
+                progress: '35'
+            }
+        ]
+    },
+    {
+        title: "Database Tools & ORM",
+        items: [
+            {
                 imgSrc: '/images/prisma.svg',
                 label: 'Prisma ORM',
-                desc: 'Database',
+                desc: 'ORM',
                 progress: '30'
             }
         ]
     },
     {
-        title: "Cloud Service",
+        title: "Cloud Services & BaaS",
         items: [
+            {
+                imgSrc: '/images/firebase.png',
+                label: 'Firebase',
+                desc: 'BaaS (Backend-as-a-Service)',
+                progress: '30'
+            },
             {
                 imgSrc: '/images/supabase.svg',
                 label: 'Supabase',
-                desc: 'Cloud Service',
+                desc: 'BaaS (Backend-as-a-Service)',
+                progress: '25'
+            },
+            {
+                imgSrc: '/images/vercel.svg',
+                label: 'Vercel',
+                desc: 'Hosting Platform',
                 progress: '25'
             }
         ]
     },
     {
-        title: "Hosting Platform",
+        title: "UI/UX & Multimedia",
         items: [
             {
-                imgSrc: '/images/vercel.svg',
-                label: 'Vercel',
-                desc: 'Hosting',
+                imgSrc: '/images/figma.jpg',
+                label: 'Figma',
+                desc: 'UI/UX Design Tool',
+                progress: '35'
+            },
+            {
+                imgSrc: '/images/capcut.png',
+                label: 'Capcut',
+                desc: 'Video Editing',
+                progress: '30'
+            },
+            {
+                imgSrc: '/images/canva.png',
+                label: 'Canva',
+                desc: 'Graphic Design',
+                progress: '30'
+            },
+            {
+                imgSrc: '/images/premiere.png',
+                label: 'Adobe Premiere Pro',
+                desc: 'Video Editing',
                 progress: '25'
             }
         ]
@@ -637,6 +727,18 @@ const skillItem = [
                 label: 'Node Package Manager',
                 desc: 'Package Manager',
                 progress: '28'
+            },
+            {
+                imgSrc: '/images/python.svg',
+                label: 'pip',
+                desc: 'Python Package Manager',
+                progress: '30'
+            },
+            {
+                imgSrc: '/images/flutter.svg',
+                label: 'Pub',
+                desc: 'Dart/Flutter Package Manager',
+                progress: '30'
             }
         ]
     }
@@ -657,21 +759,21 @@ const Skill = ()=>{
                             children: "Stack"
                         }, void 0, false, {
                             fileName: "[project]/src/components/Skill/Skill.jsx",
-                            lineNumber: 118,
+                            lineNumber: 80,
                             columnNumber: 16
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/Skill/Skill.jsx",
-                    lineNumber: 117,
+                    lineNumber: 79,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                     className: "text-zinc-400 mt-3 mb-8 max-w-[50ch]",
-                    children: "Advanced technology I use to create websites."
+                    children: "Advanced technology I use to create projects."
                 }, void 0, false, {
                     fileName: "[project]/src/components/Skill/Skill.jsx",
-                    lineNumber: 120,
+                    lineNumber: 82,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -683,7 +785,7 @@ const Skill = ()=>{
                                     children: data.title
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/Skill/Skill.jsx",
-                                    lineNumber: 126,
+                                    lineNumber: 88,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
@@ -695,34 +797,34 @@ const Skill = ()=>{
                                             classes: "reveal-up"
                                         }, key, false, {
                                             fileName: "[project]/src/components/Skill/Skill.jsx",
-                                            lineNumber: 129,
+                                            lineNumber: 91,
                                             columnNumber: 19
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/Skill/Skill.jsx",
-                                    lineNumber: 127,
+                                    lineNumber: 89,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, key, true, {
                             fileName: "[project]/src/components/Skill/Skill.jsx",
-                            lineNumber: 125,
+                            lineNumber: 87,
                             columnNumber: 13
                         }, this))
                 }, void 0, false, {
                     fileName: "[project]/src/components/Skill/Skill.jsx",
-                    lineNumber: 123,
+                    lineNumber: 85,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/Skill/Skill.jsx",
-            lineNumber: 116,
+            lineNumber: 78,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/components/Skill/Skill.jsx",
-        lineNumber: 115,
+        lineNumber: 77,
         columnNumber: 5
     }, this);
 };

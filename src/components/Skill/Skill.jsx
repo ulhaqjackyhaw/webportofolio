@@ -22,7 +22,7 @@ const skillItem = [
       { imgSrc: '/images/laravel.svg', label: 'Laravel', desc: 'Framework', progress: '40' },
       { imgSrc: '/images/bootstrap.png', label: 'Bootstrap', desc: 'Framework', progress: '30' },
       { imgSrc: '/images/jquery.jpeg', label: 'jQuery', desc: 'Library', progress: '28' },
-      { imgSrc: '/images/flask.svg', label: 'Flask', desc: 'Framework', progress: '25' },
+      { imgSrc: '/images/flask.png', label: 'Flask', desc: 'Framework', progress: '25' },
     ]
   },
   {

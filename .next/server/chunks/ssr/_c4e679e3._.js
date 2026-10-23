@@ -330,7 +330,6 @@ const Hero = ()=>{
                     columnNumber: 17
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "hidden lg:block",
                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("figure", {
                         className: "w-full max-w-[480px] ml-auto bg-gradient-to-t from-sky-400 via-25% via-sky-400/40 to-65% rounded-[60px] overflow-hidden",
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
@@ -342,17 +341,17 @@ const Hero = ()=>{
                         }, void 0, false, {
                             fileName: "[project]/src/components/Hero/Hero.jsx",
                             lineNumber: 49,
-                            columnNumber: 25
+                            columnNumber: 5
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/components/Hero/Hero.jsx",
                         lineNumber: 48,
-                        columnNumber: 21
+                        columnNumber: 3
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/components/Hero/Hero.jsx",
                     lineNumber: 47,
-                    columnNumber: 17
+                    columnNumber: 1
                 }, this)
             ]
         }, void 0, true, {
@@ -597,7 +596,7 @@ const skillItem = [
                 progress: '40'
             },
             {
-                imgSrc: '/images/laravel.svg',
+                imgSrc: '/images/laravel.png',
                 label: 'Laravel',
                 desc: 'Framework',
                 progress: '40'
@@ -615,7 +614,7 @@ const skillItem = [
                 progress: '28'
             },
             {
-                imgSrc: '/images/flask.svg',
+                imgSrc: '/images/flask.png',
                 label: 'Flask',
                 desc: 'Framework',
                 progress: '25'

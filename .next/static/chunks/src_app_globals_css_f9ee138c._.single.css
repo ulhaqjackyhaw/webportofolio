@@ -9940,10 +9940,6 @@ html {
     margin-left: 15rem;
   }
 
-  .lg\:block {
-    display: block;
-  }
-
   .lg\:flex {
     display: flex;
   }

@@ -4,7 +4,7 @@
   font-style: normal;
   font-weight: 500;
   font-display: swap;
-  src: url("../media/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuI6fAZJhiJ_Ek__EeAmM-s.037cd858.woff2") format("woff2");
+  src: url("../media/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuI6fAZJhiJ_Ek__EeAmM-s.1eb5bca5.woff2") format("woff2");
   unicode-range: U+460-52F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
 }
 
@@ -13,7 +13,7 @@
   font-style: normal;
   font-weight: 500;
   font-display: swap;
-  src: url("../media/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuI6fAZthiJ_Ek__EeAmM-s.a3029086.woff2") format("woff2");
+  src: url("../media/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuI6fAZthiJ_Ek__EeAmM-s.f087b171.woff2") format("woff2");
   unicode-range: U+301, U+400-45F, U+490-491, U+4B0-4B1, U+2116;
 }
 
@@ -22,7 +22,7 @@
   font-style: normal;
   font-weight: 500;
   font-display: swap;
-  src: url("../media/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuI6fAZNhiJ_Ek__EeAmM-s.3b4de56f.woff2") format("woff2");
+  src: url("../media/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuI6fAZNhiJ_Ek__EeAmM-s.dba696d1.woff2") format("woff2");
   unicode-range: U+1F??;
 }
 
@@ -31,7 +31,7 @@
   font-style: normal;
   font-weight: 500;
   font-display: swap;
-  src: url("../media/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuI6fAZxhiJ_Ek__EeAmM-s.6ca4c5d7.woff2") format("woff2");
+  src: url("../media/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuI6fAZxhiJ_Ek__EeAmM-s.400f1f83.woff2") format("woff2");
   unicode-range: U+370-377, U+37A-37F, U+384-38A, U+38C, U+38E-3A1, U+3A3-3FF;
 }
 
@@ -50,7 +50,7 @@
   font-weight: 500;
   font-display: swap;
   src: url("../media/UcCO3FwrK3iLTeHuS_nVMrMxCp50SjIw2boKoduKmMEVuI6fAZFhiJ_Ek__EeAmM-s.a6224fc1.woff2") format("woff2");
-  unicode-range: U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  unicode-range: U+100-2BA, U+2BD-2C5, U+2C7-2CC, U+2CE-2D7, U+2DD-2FF, U+304, U+308, U+329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 
 @font-face {
@@ -10018,10 +10018,6 @@ html {
 
   .lg\:ml-60 {
     margin-left: 15rem;
-  }
-
-  .lg\:block {
-    display: block;
   }
 
   .lg\:flex {

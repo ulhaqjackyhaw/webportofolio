@@ -7,6 +7,7 @@ const skillItem = [
     items: [
       { imgSrc: '/images/javascript.svg', label: 'JavaScript', desc: 'Programming Language', progress: '52' },
       { imgSrc: '/images/php.svg', label: 'PHP', desc: 'Programming Language', progress: '45' },
+      { imgSrc: '/images/java.svg', label: 'Java', desc: 'Programming Language', progress: '35' },
       { imgSrc: '/images/cpp.svg', label: 'C++', desc: 'Programming Language', progress: '40' },
       { imgSrc: '/images/c.png', label: 'C', desc: 'Programming Language', progress: '38' },
       { imgSrc: '/images/dart.svg', label: 'Dart', desc: 'Programming Language', progress: '35' },
@@ -37,6 +38,7 @@ const skillItem = [
     title: "Database",
     items: [
       { imgSrc: '/images/mysql.png', label: 'MySQL', desc: 'Relational Database', progress: '35' },
+      { imgSrc: '/images/postgresql.svg', label: 'PostgreSQL', desc: 'Relational Database', progress: '30' },
     ]
   },
   {

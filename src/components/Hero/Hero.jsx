@@ -14,7 +14,7 @@ const Hero = ({ profile }) => {
     const connectUrl = profile?.linkedin_url || "https://www.linkedin.com/in/dhiyaulhaq100";
 
     return (
-        <section id="home" className="pt-28 lg:pt-36">
+        <section id="home" className="pt-32 sm:pt-36 lg:pt-40">
             <div className="container lg:grid lg:grid-cols-2 items-center lg:gap-10">
                 <div>
                     <div className="flex items-center gap-3">
@@ -28,13 +28,13 @@ const Hero = ({ profile }) => {
                     <h2 className="font-sans headline-1">
                         Hello, My Name <span className="headline-3 font-sans">is {fullName},</span> I&apos;am a <span className="headline-4 font-sans">{title}</span>
                     </h2>
-                    <div className="flex items-center gap-3 ">
+                    <div className="flex items-center gap-3 mb-8 lg:mb-0">
                         <Buttons href={cvUrl} download={true} label="Download CV" icon={<DownloadSharpIcon />} />
                         <ButtonExtend href={connectUrl} target="_blank" label="Connect to Me" icon={<ArrowOutwardIcon />} />
                     </div>
                 </div>
-                <div>
-                    <figure className="w-full max-w-[480px] ml-auto bg-gradient-to-t from-sky-400 via-25% via-sky-400/40 to-65% rounded-[60px] overflow-hidden">
+                <div className="mt-8 lg:mt-0">
+                    <figure className="w-full max-w-[420px] lg:max-w-[480px] mx-auto lg:ml-auto bg-gradient-to-t from-sky-400 via-25% via-sky-400/40 to-65% rounded-[40px] sm:rounded-[60px] overflow-hidden shadow-2xl">
                         <Image
                             src={avatarUrl}
                             width={typeof avatarUrl === 'string' ? 480 : undefined}

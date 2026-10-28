@@ -5,6 +5,7 @@ const Navbar = ({ navOpen }) => {
   const activeBox = React.useRef()
 
   const initActiveBox = () => {
+    if (!activeBox.current || !lastActiveLink.current) return;
     activeBox.current.style.top = lastActiveLink.current.offsetTop + 'px'
     activeBox.current.style.left = lastActiveLink.current.offsetLeft + 'px'
     activeBox.current.style.width = lastActiveLink.current.offsetWidth + 'px'
@@ -22,10 +23,12 @@ const Navbar = ({ navOpen }) => {
     event.target.classList.add('active')
     lastActiveLink.current = event.target
 
-    activeBox.current.style.top = event.target.offsetTop + 'px'
-    activeBox.current.style.left = event.target.offsetLeft + 'px'
-    activeBox.current.style.width = event.target.offsetWidth + 'px'
-    activeBox.current.style.height = event.target.offsetHeight + 'px'
+    if (activeBox.current) {
+      activeBox.current.style.top = event.target.offsetTop + 'px'
+      activeBox.current.style.left = event.target.offsetLeft + 'px'
+      activeBox.current.style.width = event.target.offsetWidth + 'px'
+      activeBox.current.style.height = event.target.offsetHeight + 'px'
+    }
   }
 
   const navItems = [
@@ -68,11 +71,18 @@ const Navbar = ({ navOpen }) => {
   ];
 
   return (
-    <nav className={`navbar ${navOpen ? 'active' : ''}`}>
+    <nav className={`navbar ${navOpen ? 'active' : ''}`} aria-label="Main Navigation">
       {navItems.map(({
         label, link, className, ref
       }, key) => (
-        <a href={link} key={key} ref={ref} className={className} onClick={activeLink}>
+        <a 
+          href={link} 
+          key={key} 
+          ref={ref} 
+          className={className} 
+          onClick={activeLink}
+          title={`Ke bagian ${label}`}
+        >
           {label}
         </a>
       ))}

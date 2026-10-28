@@ -97,19 +97,19 @@ const Skill = ({ initialSkills }) => {
   }, [initialSkills]);
 
   return (
-    <section id="tools" className="section">
+    <section id="tools" className="section" aria-labelledby="tools-heading">
       <div className="container">
-        <h2 className="headline-2 reveal-up">
+        <h2 id="tools-heading" className="headline-2 reveal-up">
           Tech <span className="headline-5">Stack</span>
         </h2>
         <p className="text-zinc-400 mt-3 mb-8 max-w-[50ch]">
-          Advanced technology I use to create projects.
+          Teknologi dan tools modern yang saya gunakan dalam membangun aplikasi dan proyek digital.
         </p>
         <div className="grid gap-3 grid-cols-[repeat(auto+fill,_minmax(250px,_1fr))]">
           {displaySkills.map((data, key) => (
             <div key={key}>
-              <h5 className="text-lg mb-1 reveal-up">{data.title}</h5>
-              <ul>
+              <h3 className="text-lg font-semibold text-zinc-200 mb-2 reveal-up">{data.title}</h3>
+              <ul className="space-y-3">
                 {data.items.map(({ imgSrc, label, desc, progress }, idx) => (
                   <SkillCard
                     key={idx}

@@ -61,9 +61,9 @@ const ProjectCard = ({ initialProjects }) => {
   }, [initialProjects]);
 
   return (
-    <section id="project" className="section">
+    <section id="project" className="section" aria-labelledby="project-heading">
       <div className="container">
-        <h2 className="headline-2 mb-8 reveal-up">
+        <h2 id="project-heading" className="headline-2 mb-8 reveal-up">
           My <span className="headline-5">portfolio</span> highlights
         </h2>
         <div className="grid gap-x-4 gap-y-5 grid-cols-[repeat(auto-fill,_minmax(280px,_1fr))]">

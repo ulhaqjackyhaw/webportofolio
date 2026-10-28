@@ -4,7 +4,7 @@ import LaunchSharpIcon from '@mui/icons-material/LaunchSharp';
 
 const CertificateCard = ({ name, imgSrc, certificateLink }) => {
   const CardContent = (
-    <div
+    <article
       className={`bg-zinc-800 p-4 rounded-xl w-full max-w-lg transition-all duration-300 ${
         certificateLink
           ? 'hover:scale-[1.02] hover:bg-zinc-700/80 hover:ring-2 hover:ring-sky-500/50 cursor-pointer group'
@@ -18,7 +18,7 @@ const CertificateCard = ({ name, imgSrc, certificateLink }) => {
             width={typeof imgSrc === 'string' ? 600 : undefined}
             height={typeof imgSrc === 'string' ? 420 : undefined}
             loading="lazy"
-            alt={name || 'Certificate'}
+            alt={`Sertifikat ${name || 'Keahlian'} - Dhiya Ulhaq`}
             quality={75}
             className={`img-cover w-full h-auto rounded-lg transition-transform duration-300 ${
               certificateLink ? 'group-hover:scale-105' : ''
@@ -34,7 +34,7 @@ const CertificateCard = ({ name, imgSrc, certificateLink }) => {
           </figcaption>
         </figure>
       </div>
-    </div>
+    </article>
   );
 
   if (certificateLink) {
@@ -43,7 +43,8 @@ const CertificateCard = ({ name, imgSrc, certificateLink }) => {
         href={certificateLink}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label={`Lihat sertifikat ${name}`}
+        aria-label={`Lihat kredensial resmi sertifikat ${name}`}
+        title={`Buka sertifikat resmi ${name}`}
         className="block w-full max-w-lg reveal-up no-underline"
       >
         {CardContent}

@@ -43,9 +43,9 @@ const Certificate = ({ initialCertificates }) => {
   }, [initialCertificates]);
 
   return (
-    <section id="certificate" className="section overflow-hidden">
+    <section id="certificate" className="section overflow-hidden" aria-labelledby="certificate-heading">
       <div className="container">
-        <h2 className="headline-2 mb-8 reveal-up">
+        <h2 id="certificate-heading" className="headline-2 mb-8 reveal-up">
           Certif<span className="headline-5">icate</span>
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4 p-4">

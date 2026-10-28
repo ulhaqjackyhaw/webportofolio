@@ -14,7 +14,7 @@ const Hero = ({ profile }) => {
     const connectUrl = profile?.linkedin_url || "https://www.linkedin.com/in/dhiyaulhaq100";
 
     return (
-        <section id="home" className="pt-32 sm:pt-36 lg:pt-40">
+        <section id="home" className="pt-32 sm:pt-36 lg:pt-40" aria-label="Hero Section">
             <div className="container lg:grid lg:grid-cols-2 items-center lg:gap-10">
                 <div>
                     <div className="flex items-center gap-3">
@@ -25,12 +25,26 @@ const Hero = ({ profile }) => {
                             {statusText}
                         </div>
                     </div>
-                    <h2 className="font-sans headline-1">
+                    <h1 className="font-sans headline-1">
                         Hello, My Name <span className="headline-3 font-sans">is {fullName},</span> I&apos;am a <span className="headline-4 font-sans">{title}</span>
-                    </h2>
+                    </h1>
                     <div className="flex items-center gap-3 mb-8 lg:mb-0">
-                        <Buttons href={cvUrl} download={true} label="Download CV" icon={<DownloadSharpIcon />} />
-                        <ButtonExtend href={connectUrl} target="_blank" label="Connect to Me" icon={<ArrowOutwardIcon />} />
+                        <Buttons 
+                            href={cvUrl} 
+                            download={true} 
+                            label="Download CV" 
+                            icon={<DownloadSharpIcon />} 
+                            aria-label={`Download CV Curriculum Vitae ${fullName}`}
+                            title={`Download CV ${fullName}`}
+                        />
+                        <ButtonExtend 
+                            href={connectUrl} 
+                            target="_blank" 
+                            label="Connect to Me" 
+                            icon={<ArrowOutwardIcon />} 
+                            aria-label={`Hubungi ${fullName} di LinkedIn`}
+                            title={`Kunjungi profil LinkedIn ${fullName}`}
+                        />
                     </div>
                 </div>
                 <div className="mt-8 lg:mt-0">
@@ -41,8 +55,8 @@ const Hero = ({ profile }) => {
                             height={typeof avatarUrl === 'string' ? 480 : undefined}
                             priority
                             fetchPriority="high"
-                            quality={75}
-                            alt="banner"
+                            quality={80}
+                            alt={`Foto profil ${fullName} - ${title}`}
                             className="w-full h-auto object-cover"
                         />
                     </figure>

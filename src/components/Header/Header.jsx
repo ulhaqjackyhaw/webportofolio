@@ -12,7 +12,11 @@ const Header = () => {
             <div className="max-w-screen-2xl w-full mx-auto px-4 flex justify-between items-center md:px-6 md:grid md:grid-cols-[1fr,3fr,1fr]">
                 <div></div>
                 <div className="relative md:justify-self-center">
-                    <button className="menu-btn material-symbols md:hidden" aria-label="Opem nav" onClick={() => setNavOpen((prev) => !prev)}>
+                    <button 
+                        className="menu-btn material-symbols md:hidden" 
+                        aria-label="Toggle navigation menu" 
+                        onClick={() => setNavOpen((prev) => !prev)}
+                    >
                         <Hamburger
                             toggled={navOpen}
                             size={25}
@@ -26,7 +30,12 @@ const Header = () => {
                     </button>
                     <Navbar navOpen={navOpen} />
                 </div>
-                <a href="#contact" className="btn btn-secondary hover:bg-slate-400 max-md:hidden md:justify-self-end">
+                <a 
+                    href="#contact" 
+                    className="btn btn-secondary hover:bg-slate-400 max-md:hidden md:justify-self-end"
+                    aria-label="Hubungi Dhiya Ulhaq"
+                    title="Hubungi Dhiya Ulhaq"
+                >
                     Contact Me
                 </a>
             </div>

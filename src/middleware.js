@@ -6,10 +6,15 @@ export async function middleware(request) {
     request,
   });
 
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL || '',
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '',
-    {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+  if (!supabaseUrl || !supabaseAnonKey) {
+    return supabaseResponse;
+  }
+
+  try {
+    const supabase = createServerClient(supabaseUrl, supabaseAnonKey, {
       cookies: {
         getAll() {
           return request.cookies.getAll();
@@ -24,29 +29,31 @@ export async function middleware(request) {
           );
         },
       },
-    }
-  );
+    });
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
 
-  // Proteksi rute /admin
-  if (request.nextUrl.pathname.startsWith('/admin')) {
-    if (!user) {
-      const url = request.nextUrl.clone();
-      url.pathname = '/login';
-      return NextResponse.redirect(url);
+    // Proteksi rute /admin
+    if (request.nextUrl.pathname.startsWith('/admin')) {
+      if (!user) {
+        const url = request.nextUrl.clone();
+        url.pathname = '/login';
+        return NextResponse.redirect(url);
+      }
     }
-  }
 
-  // Jika sudah login dan membuka /login, arahkan langsung ke /admin
-  if (request.nextUrl.pathname === '/login') {
-    if (user) {
-      const url = request.nextUrl.clone();
-      url.pathname = '/admin';
-      return NextResponse.redirect(url);
+    // Jika sudah login dan membuka /login, arahkan langsung ke /admin
+    if (request.nextUrl.pathname === '/login') {
+      if (user) {
+        const url = request.nextUrl.clone();
+        url.pathname = '/admin';
+        return NextResponse.redirect(url);
+      }
     }
+  } catch {
+    return supabaseResponse;
   }
 
   return supabaseResponse;
@@ -55,4 +62,3 @@ export async function middleware(request) {
 export const config = {
   matcher: ['/admin/:path*', '/login'],
 };
-

@@ -1,11 +1,24 @@
 import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+function getSupabaseClient() {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
+  if (!supabaseUrl || !supabaseAnonKey) {
+    return null;
+  }
+
+  try {
+    return createClient(supabaseUrl, supabaseAnonKey);
+  } catch {
+    return null;
+  }
+}
 
 export async function getSkills() {
+  const supabase = getSupabaseClient();
+  if (!supabase) return null;
+
   try {
     const { data, error } = await supabase
       .from('skills')
@@ -21,6 +34,9 @@ export async function getSkills() {
 }
 
 export async function getProjects() {
+  const supabase = getSupabaseClient();
+  if (!supabase) return null;
+
   try {
     const { data, error } = await supabase
       .from('projects')
@@ -36,6 +52,9 @@ export async function getProjects() {
 }
 
 export async function getCertificates() {
+  const supabase = getSupabaseClient();
+  if (!supabase) return null;
+
   try {
     const { data, error } = await supabase
       .from('certificates')
@@ -49,4 +68,3 @@ export async function getCertificates() {
     return null;
   }
 }
-

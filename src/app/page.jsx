@@ -8,12 +8,13 @@ import Contact from "@/components/Contact/Contact";
 import Footer from "@/components/Footer/Footer";
 import LenisComponent from '@/libs/LenisComponent';
 import Animation from '@/libs/Animation';
-import { getSkills, getProjects, getCertificates } from '@/libs/supabase/data';
+import { getProfile, getSkills, getProjects, getCertificates } from '@/libs/supabase/data';
 
 export const revalidate = 0;
 
 export default async function Home() {
-  const [skills, projects, certificates] = await Promise.all([
+  const [profile, skills, projects, certificates] = await Promise.all([
+    getProfile(),
     getSkills(),
     getProjects(),
     getCertificates(),
@@ -23,14 +24,14 @@ export default async function Home() {
     <LenisComponent>
       <Header />
       <main>
-        <Hero />
-        <About />
+        <Hero profile={profile} />
+        <About profile={profile} />
         <Skill initialSkills={skills} />
         <Work initialProjects={projects} />
         <Certificate initialCertificates={certificates} />
-        <Contact />
+        <Contact profile={profile} />
       </main>
-      <Footer />
+      <Footer profile={profile} />
       <Animation />
     </LenisComponent>
   );

@@ -120,9 +120,24 @@ export default function InitialDataSeeder() {
       const { error: certErr } = await supabase.from('certificates').insert(initialCertificates);
       if (certErr) throw new Error(`Certificates error: ${certErr.message}`);
 
+      // 4. Upsert Profile
+      await supabase.from('profile').upsert({
+        id: 1,
+        full_name: 'Dhiya Ulhaq',
+        title: 'Software Developer',
+        status_text: 'Available for work',
+        avatar_url: '/images/Ulhaq.png',
+        cv_url: 'https://drive.google.com/file/d/1UScmjE3fVCfuYrAn2zqOCuxV65H-qsMx/view?usp=drive_link',
+        about_text: '👋 Hello!, I am Dhiya Ulhaq, Third-year Informatics Engineering student at Politeknik Negeri Semarang with a strong focus on mobile development, IoT, and web development. Possesses a passion for innovation and a proven track record in developing successful mobile app, web projects, and IoT. Actively involved in project base learning, demonstrating strong problem-solving skills, teamwork, adaptability, and a continuous learning mindset.',
+        github_url: 'https://github.com/ulhaqjackyhaw',
+        linkedin_url: 'https://www.linkedin.com/in/dhiyaulhaq100',
+        instagram_url: 'https://www.instagram.com/dhy_lhq',
+        email: 'ulhaqjackyhaw@gmail.com',
+      }, { onConflict: 'id' });
+
       setResult({
         type: 'success',
-        text: 'Semua data awal (30 Skills, 5 Projects, 4 Certificates) berhasil diimpor ke database Supabase!',
+        text: 'Semua data awal (Profil, 30 Skills, 5 Projects, 4 Certificates) berhasil diimpor ke database Supabase!',
       });
     } catch (err) {
       setResult({

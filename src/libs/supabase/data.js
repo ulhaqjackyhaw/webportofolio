@@ -15,6 +15,24 @@ function getSupabaseClient() {
   }
 }
 
+export async function getProfile() {
+  const supabase = getSupabaseClient();
+  if (!supabase) return null;
+
+  try {
+    const { data, error } = await supabase
+      .from('profile')
+      .select('*')
+      .eq('id', 1)
+      .maybeSingle();
+
+    if (error || !data) return null;
+    return data;
+  } catch {
+    return null;
+  }
+}
+
 export async function getSkills() {
   const supabase = getSupabaseClient();
   if (!supabase) return null;

@@ -25,22 +25,27 @@ const sitemap = [
     }
 ];
 
-const socials = [
-    {
-        label: 'GitHub',
-        href: 'https://github.com/ulhaqjackyhaw'
-    },
-    {
-        label: 'LinkedIn',
-        href: 'https://www.linkedin.com/in/dhiyaulhaq100'
-    },
-    {
-        label: 'Instagram',
-        href: 'https://www.instagram.com/dhy_lhq'
-    },
-];
+const Footer = ({ profile }) => {
+    const githubUrl = profile?.github_url || 'https://github.com/ulhaqjackyhaw';
+    const linkedinUrl = profile?.linkedin_url || 'https://www.linkedin.com/in/dhiyaulhaq100';
+    const instagramUrl = profile?.instagram_url || 'https://www.instagram.com/dhy_lhq';
+    const email = profile?.email || 'ulhaqjackyhaw@gmail.com';
 
-const Footer = () => {
+    const socials = [
+        {
+            label: 'GitHub',
+            href: githubUrl
+        },
+        {
+            label: 'LinkedIn',
+            href: linkedinUrl
+        },
+        {
+            label: 'Instagram',
+            href: instagramUrl
+        },
+    ];
+
     return (
         <footer className="section">
             <div className="container">
@@ -49,7 +54,7 @@ const Footer = () => {
                         <h2 className="headline-2 mb-8 lg:max-w-[12ch] reveal-up">
                             Let&apos;s work <span className="headline-5">together today!</span>
                         </h2>
-                        <Buttons href="mailto:ulhaqjackyaw@gmail.com" label="Start project" icon={<ArrowForwardIcon />} classes="reveal-up" />
+                        <Buttons href={`mailto:${email}`} label="Start project" icon={<ArrowForwardIcon />} classes="reveal-up" />
                     </div>
                     <div className="grid grid-cols-2 gap-4 lg:pl-20">
                         <div>

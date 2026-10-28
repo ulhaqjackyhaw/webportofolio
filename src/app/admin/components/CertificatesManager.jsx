@@ -3,6 +3,7 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { createClient } from '@/libs/supabase/client';
+import ImageCropperModal from './ImageCropperModal';
 
 export default function CertificatesManager() {
   const supabase = createClient();
@@ -10,6 +11,11 @@ export default function CertificatesManager() {
   const [loading, setLoading] = useState(true);
   const [editingId, setEditingId] = useState(null);
   const [uploading, setUploading] = useState(false);
+
+  // Cropper State
+  const [cropperOpen, setCropperOpen] = useState(false);
+  const [cropperImageSrc, setCropperImageSrc] = useState(null);
+  const [originalFile, setOriginalFile] = useState(null);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -38,21 +44,33 @@ export default function CertificatesManager() {
     fetchCertificates();
   }, [fetchCertificates]);
 
-  const handleFileUpload = async (e) => {
+  const handleFileSelect = (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
+    setOriginalFile(file);
+    const reader = new FileReader();
+    reader.onload = () => {
+      setCropperImageSrc(reader.result);
+      setCropperOpen(true);
+    };
+    reader.readAsDataURL(file);
+    e.target.value = '';
+  };
+
+  const uploadCertBlob = async (blobOrFile) => {
+    setCropperOpen(false);
     setUploading(true);
     setStatusMsg({ type: '', text: '' });
 
     try {
-      const fileExt = file.name.split('.').pop();
+      const fileExt = originalFile?.name?.split('.').pop() || 'jpg';
       const fileName = `cert_${Date.now()}.${fileExt}`;
       const filePath = `certificates/${fileName}`;
 
       const { error: uploadError } = await supabase.storage
         .from('portfolio-assets')
-        .upload(filePath, file);
+        .upload(filePath, blobOrFile);
 
       if (uploadError) throw uploadError;
 
@@ -271,11 +289,11 @@ export default function CertificatesManager() {
 
                 <div className="flex items-center gap-3">
                   <label className="cursor-pointer px-3 py-1.5 bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 rounded-lg text-xs text-zinc-200 transition-colors">
-                    <span>{uploading ? 'Mengunggah...' : 'Upload File Sertifikat'}</span>
+                    <span>{uploading ? 'Mengunggah...' : 'Upload File (Crop / Full)'}</span>
                     <input
                       type="file"
                       accept="image/*"
-                      onChange={handleFileUpload}
+                      onChange={handleFileSelect}
                       disabled={uploading}
                       className="hidden"
                     />
@@ -312,6 +330,16 @@ export default function CertificatesManager() {
           </div>
         </div>
       )}
+
+      {/* Image Cropper Modal for Certificates */}
+      <ImageCropperModal
+        isOpen={cropperOpen}
+        imageSrc={cropperImageSrc}
+        initialAspect={4 / 3}
+        onClose={() => setCropperOpen(false)}
+        onCropComplete={uploadCertBlob}
+        onUseFull={() => uploadCertBlob(originalFile)}
+      />
     </div>
   );
 }

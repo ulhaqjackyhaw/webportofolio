@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { createClient } from '@/libs/supabase/client';
 import Link from 'next/link';
 
+import ProfileManager from './components/ProfileManager';
 import SkillsManager from './components/SkillsManager';
 import ProjectsManager from './components/ProjectsManager';
 import CertificatesManager from './components/CertificatesManager';
@@ -13,7 +14,7 @@ import InitialDataSeeder from './components/InitialDataSeeder';
 export default function AdminDashboard() {
   const router = useRouter();
   const supabase = createClient();
-  const [activeTab, setActiveTab] = useState('skills');
+  const [activeTab, setActiveTab] = useState('profile');
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -82,6 +83,16 @@ export default function AdminDashboard() {
         {/* Navigation Tabs */}
         <div className="flex flex-wrap items-center gap-2 border-b border-zinc-800 pb-3 mb-8">
           <button
+            onClick={() => setActiveTab('profile')}
+            className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
+              activeTab === 'profile'
+                ? 'bg-sky-500 text-zinc-950 font-semibold shadow-lg shadow-sky-500/20'
+                : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900'
+            }`}
+          >
+            👤 Profil, CV & Kontak
+          </button>
+          <button
             onClick={() => setActiveTab('skills')}
             className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
               activeTab === 'skills'
@@ -89,7 +100,7 @@ export default function AdminDashboard() {
                 : 'text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900'
             }`}
           >
-            🛠️ Skills ({' '})
+            🛠️ Skills
           </button>
           <button
             onClick={() => setActiveTab('projects')}
@@ -125,6 +136,7 @@ export default function AdminDashboard() {
 
         {/* Tab Content */}
         <div>
+          {activeTab === 'profile' && <ProfileManager />}
           {activeTab === 'skills' && <SkillsManager />}
           {activeTab === 'projects' && <ProjectsManager />}
           {activeTab === 'certificates' && <CertificatesManager />}
@@ -134,4 +146,3 @@ export default function AdminDashboard() {
     </div>
   );
 }
-

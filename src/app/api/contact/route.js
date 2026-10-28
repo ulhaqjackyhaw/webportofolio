@@ -12,7 +12,7 @@ export async function POST(request) {
     }
 
     const targetEmail = process.env.CONTACT_EMAIL || 'ulhaqjackyhaw@gmail.com';
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://webportofolio-lq360ud6q-ulhaqjackyhaws-projects.vercel.app';
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.dhiyaulhaq.web.id/';
 
     // Kirim pesan melalui FormSubmit AJAX endpoint
     const response = await fetch(`https://formsubmit.co/ajax/${targetEmail}`, {

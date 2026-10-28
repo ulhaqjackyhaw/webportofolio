@@ -2,96 +2,174 @@ import { NextResponse } from 'next/server';
 import OpenAI from 'openai';
 
 const SYSTEM_PROMPT = `
-Anda adalah "STAR-X AI", Asisten Virtual Pribadi resmi dari Dhiya Ulhaq.
-Tugas Anda adalah menyapa pengunjung, menjawab pertanyaan tentang Dhiya Ulhaq (profil, keahlian, tech stack, portofolio proyek, sertifikat, dan kontak), serta membantu recruiter atau calon klien mengenal Ulhaq lebih dekat.
+Anda adalah "STAR-X AI", asisten representasi teknis dan profesional dari Dhiya Ulhaq.
+Jawab pertanyaan pengunjung dengan gaya komunikasi profesional, padat, lugas, dan terstruktur. Hindari bahasa berlebihan, klise, atau penggunaan emoji yang berlebihan. Berikan fakta teknis yang akurat berdasarkan data profil berikut.
 
-Data Profil Dhiya Ulhaq:
-- Nama Lengkap: Dhiya Ulhaq
-- Gelar/Peran: Software Developer (Fokus: Mobile App, Web Development, IoT & AI)
-- Pendidikan: Mahasiswa Teknik Informatika (Informatics Engineering) di Politeknik Negeri Semarang (Polines).
-- Status: Tersedia untuk peluang kerja Full-time, Internship/Magang, dan Proyek Kolaborasi / Freelance.
-- Keahlian Utama:
-  * Mobile Development: Flutter, Android (Java/Kotlin), Dart, State Management, Integrasi REST API.
-  * Web & Frontend: Next.js, React.js, Tailwind CSS, JavaScript (ES6+), HTML5, CSS3, Bootstrap.
-  * Backend & Database: PHP, Laravel, Node.js, Python, Flask, PostgreSQL, MySQL, Supabase, Prisma ORM.
-  * Cloud & BaaS: Supabase, Firebase, Vercel, AWS Cloud & Gen AI.
-  * IoT & Hardware: Arduino, ESP32, Sensor Monitoring, Microcontroller.
-  * AI & Machine Learning: Python, Computer Vision, YOLO, Integrasi Generative AI.
-  * UI/UX Tools: Figma, Canva.
-- Proyek Unggulan (Portfolio Highlights):
-  1. My Hiking App & Web Admin: Aplikasi mobile Flutter pemesanan/booking tiket pendakian gunung dan web admin manajemen pendaki dengan REST API.
-  2. Pill Inspector AI: Sistem deteksi dan klasifikasi pil/obat otomatis berbasis Computer Vision dan Flask API.
-  3. Fire Detection Monitoring: Sistem IoT deteksi kebakaran dini berbasis sensor hardware, aplikasi mobile, dan notifikasi real-time.
-  4. Sistem Presensi Siswa: Sistem absensi siswa cerdas dengan deteksi wajah YOLO dan framework Laravel.
-- Sertifikasi:
-  1. Cloud & Gen AI di AWS
-  2. Pemrograman JavaScript
-  3. Database Design
-  4. Database Pemrograman with SQL
-- Kontak & Sosial:
+DATA PROFIL DHIYA ULHAQ:
+- Nama: Dhiya Ulhaq
+- Peran: Software Developer (Spesialisasi: Mobile Development, Web-Based Information Systems, IoT, dan AI/Data Analysis)
+- Lokasi: Semarang, Indonesia
+- Kontak:
   * Email: ulhaqjackyhaw@gmail.com
-  * LinkedIn: https://www.linkedin.com/in/dhiyaulhaq100
-  * GitHub: https://github.com/ulhaqjackyhaw
-  * Instagram: @dhy_lhq
+  * WhatsApp: 089524174285
+  * LinkedIn: linkedin.com/in/dhiyaulhaq100
+  * GitHub: github.com/ulhaqjackyhaw
 
-Panduan Respon:
-1. Bersikaplah ramah, profesional, antusias, dan sopan seperti representasi resmi Dhiya Ulhaq.
-2. Jawab pertanyaan dalam bahasa yang digunakan oleh pengunjung (Bahasa Indonesia atau Bahasa Inggris).
-3. Buat jawaban yang ringkas, jelas, dan terstruktur (gunakan bullet points jika menyajikan daftar keahlian/proyek).
-4. Jika ada pengunjung yang tertarik merekrut atau mengajak kolaborasi, berikan email kontak (ulhaqjackyhaw@gmail.com) atau arahkan ke LinkedIn.
-5. Jika ditanya hal di luar Dhiya Ulhaq atau hal teknologi yang tidak relevan, jawab dengan sopan dan kembalikan fokus ke profil Dhiya Ulhaq.
+PENDIDIKAN:
+- Politeknik Negeri Semarang (Polines) — D3 Teknik Informatika (2023 - 2026)
+- IPK: 3.91 / 4.00 (Cumlaude)
+- Mata Kuliah Unggulan (Nilai A): Pemrograman Web, Pemrograman Mobile, Embedded System, Internet of Things, Keamanan Informasi, Desain Sistem Informasi, Sistem Basis Data.
+
+PENGALAMAN KERJA & MAGANG:
+1. Human Capital System Developer Intern — InJourney Airports Regional 1 (Okt – Des 2025):
+   - Mengembangkan Human Capital Dashboard System untuk analitik data kepegawaian.
+   - Membangun sistem manajemen magang berbasis web (Urshiports) untuk monitoring dan administrasi pemagang.
+   - Mendukung screening kandidat rekrutmen pegawai dan analisis kualifikasi promosi karir.
+2. Electronic Engineer Intern — Bandara Internasional Soekarno-Hatta (Agu – Sep 2025):
+   - Pemeliharaan sistem elektronik bandara (Digital Banner, IPTV, Time Distribution System, Public Address, Fire Alarm System).
+   - Instalasi sensor suhu Nohmi Fire Alarm System.
+   - Mengembangkan web sistem arsip pajak (Buport) untuk Unit Pajak internal bandara.
+3. Data Input Operator — Badan Pusat Statistik (Jan – Mar 2021):
+   - Input, validasi, dan verifikasi konsistensi data statistik.
+
+TECH STACK & KEAHLIAN:
+- Bahasa Pemrograman: PHP, JavaScript, Python, Dart, C, C++, Java.
+- Web & Frontend: Laravel, Next.js, React.js, Tailwind CSS, Bootstrap, HTML5, CSS3, jQuery.
+- Mobile: Flutter, Dart, Android.
+- Database: MySQL, PostgreSQL, Oracle SQL, Supabase, Prisma ORM.
+- IoT & Hardware: ESP32, Arduino, Sensor Monitoring.
+- AI & Data: Computer Vision, YOLO, Python (Flask), RAG (Retrieval-Augmented Generation).
+- Tools: Git/GitHub, Vercel, Firebase, Figma, Canva.
+
+PORTOFOLIO PROYEK UTAMA:
+1. My Hiking App & Admin Web: Aplikasi mobile Flutter untuk booking pendakian gunung dan web admin manajemen sistem berbasis Laravel & REST API.
+2. HRIS - CORE: Sistem kepegawaian komprehensif (absensi, rekrutmen, karir) berbasis Laravel & PostgreSQL.
+3. Dashboard Kepegawaian Human Capital: Dashboard analitik data karyawan InJourney Airports Regional 1 (Laravel & Alpine.js).
+4. Urshiports: Sistem manajemen magang terpadu InJourney Airports.
+5. Buport (Sistem Arsip Pajak): Aplikasi web arsip bukti potong pajak vendor bandara.
+6. Sistem Presensi Siswa (SISMO): Web presensi cerdas dengan deteksi wajah YOLO & Laravel.
+7. Pill Inspector AI & MyHiking RAG AI: Solusi AI dengan Computer Vision dan RAG (Flask).
+8. IoT Fire Detection Monitoring: Pendeteksi kebakaran dini berbasis hardware sensor dan mobile app.
+
+SERTIFIKASI:
+- BNSP: Certificate of Competence - Intermediate Multimedia Designer
+- Kominfo VSGA: Intermediate Multimedia Designer
+- AWS: Cloud & Gen AI di AWS
+- MikroTik: MikroTik Certified Network Associate (MTCNA)
+- CourseStack, Inc: Certified Cybersecurity Educator Professional (CCEP)
+- Oracle Academy: Database Design & Database Programming with SQL
+- Dicoding: Pemrograman JavaScript, Python, SQL
+- Big Data: Certified Associate Big Data Analyst
+- Bahasa: TOEIC (Score: 510) & TOEFL ITP
+
+PANDUAN RESPON:
+- Gunakan bahasa Indonesia yang profesional dan formal-santai (atau bahasa Inggris jika ditanya dalam bahasa Inggris).
+- Format jawaban dengan ringkas, to-the-point, dan gunakan bullet points untuk daftar teknis.
+- Hindari basa-basi yang panjang atau kesan robotik.
 `;
 
-// Fallback cerdas jika belum ada API key yang dipasang di environment
 function getSmartFallbackReply(userMessage) {
   const msg = (userMessage || '').toLowerCase();
 
   if (msg.includes('siapa') || msg.includes('who') || msg.includes('tentang') || msg.includes('profil') || msg.includes('profile')) {
-    return `👋 Halo! Dhiya Ulhaq adalah seorang **Software Developer** dan mahasiswa Teknik Informatika di Politeknik Negeri Semarang (Polines). 
+    return `Dhiya Ulhaq adalah seorang Software Developer lulusan Teknik Informatika dari Politeknik Negeri Semarang dengan predikat Cumlaude (IPK 3.91).
 
-Beliau memiliki fokus utama pada pengembangan **Mobile Apps (Flutter/Android)**, **Web Development (Next.js/React/Laravel)**, serta memiliki ketertarikan kuat pada **IoT dan Artificial Intelligence**. Saat ini beliau terbuka untuk peluang magang, full-time, maupun proyek freelance!`;
+Fokus Keahlian Utama:
+• Mobile Development: Flutter, Dart, Android
+• Web & Information Systems: Laravel, Next.js, React.js, Tailwind CSS
+• Backend & Database: REST API, MySQL, PostgreSQL, Oracle SQL, Supabase
+• IoT & AI: Hardware Sensor Monitoring (ESP32), Computer Vision (YOLO)
+
+Pengalaman Kerja & Magang:
+• InJourney Airports Regional 1 — Human Capital System Developer Intern
+• Bandara Internasional Soekarno-Hatta — Electronic Engineer Intern
+• Badan Pusat Statistik — Data Input Operator`;
+  }
+
+  if (msg.includes('pendidikan') || msg.includes('kuliah') || msg.includes('kampus') || msg.includes('polines') || msg.includes('ipk')) {
+    return `Pendidikan Dhiya Ulhaq:
+
+• Institusi: Politeknik Negeri Semarang (Polines)
+• Program Studi: D3 Teknik Informatika (Associate Degree in Informatics Engineering)
+• IPK: 3.91 / 4.00 (Cumlaude)
+• Mata Kuliah Unggulan (Nilai A): Pemrograman Web, Pemrograman Mobile, Embedded System, Internet of Things, Keamanan Informasi, Desain Sistem Informasi, Sistem Basis Data.`;
+  }
+
+  if (msg.includes('pengalaman') || msg.includes('magang') || msg.includes('intern') || msg.includes('kerja') || msg.includes('injourney') || msg.includes('soekarno')) {
+    return `Riwayat Pengalaman Kerja & Magang:
+
+1. Human Capital System Developer Intern — InJourney Airports Regional 1 (Okt – Des 2025):
+   • Membangun Human Capital Dashboard System untuk analitik data kepegawaian.
+   • Mengembangkan Urshiports (web manajemen administrasi pemagang).
+   • Mendukung screening kandidat rekrutmen dan analisis kualifikasi promosi pegawai.
+
+2. Electronic Engineer Intern — Bandara Internasional Soekarno-Hatta (Agu – Sep 2025):
+   • Pemeliharaan sistem elektronik bandara (Digital Banner, IPTV, Time Distribution System, Public Address, Fire Alarm System).
+   • Instalasi sensor suhu Nohmi Fire Alarm System.
+   • Membangun sistem arsip pajak berbasis web (Buport) untuk Unit Pajak internal bandara.
+
+3. Data Input Operator — Badan Pusat Statistik (Jan – Mar 2021):
+   • Input, validasi, dan verifikasi konsistensi data statistik.`;
   }
 
   if (msg.includes('skill') || msg.includes('keahlian') || msg.includes('stack') || msg.includes('bahasa') || msg.includes('tools')) {
-    return `💻 Berikut adalah Tech Stack utama yang dikuasai oleh Dhiya Ulhaq:
+    return `Tech Stack & Keahlian Utama Dhiya Ulhaq:
 
-• **Mobile**: Flutter, Dart, Android (Java)
-• **Frontend & Web**: Next.js, React.js, Tailwind CSS, JavaScript, HTML/CSS
-• **Backend & DB**: Laravel, PHP, Python (Flask), PostgreSQL, MySQL, Supabase, Prisma ORM
-• **IoT & AI**: ESP32/Arduino sensor monitoring, Machine Learning (YOLO, Computer Vision)
-• **Cloud & Tools**: Vercel, Firebase, Git/GitHub, Figma`;
+• Web & Frontend: Laravel, Next.js, React.js, Tailwind CSS, Bootstrap, HTML/CSS, JavaScript
+• Mobile: Flutter, Dart, Android
+• Backend & Database: PHP, Python (Flask), MySQL, PostgreSQL, Oracle SQL, Supabase, Prisma ORM
+• IoT & AI: ESP32, Arduino, Sensor Monitoring, Computer Vision (YOLO), RAG
+• Tools: Git/GitHub, Vercel, Firebase, Figma, Canva`;
   }
 
-  if (msg.includes('proyek') || msg.includes('project') || msg.includes('porto') || msg.includes('karya') || msg.includes('hiking') || msg.includes('pill')) {
-    return `🚀 Beberapa proyek unggulan yang pernah dibangun oleh Dhiya Ulhaq antara lain:
+  if (msg.includes('proyek') || msg.includes('project') || msg.includes('porto') || msg.includes('hiking') || msg.includes('presensi') || msg.includes('hris')) {
+    return `Portofolio Proyek Unggulan Dhiya Ulhaq:
 
-1. **My Hiking App & Web Admin**: Aplikasi mobile Flutter untuk booking pendakian gunung yang terintegrasi dengan REST API web backend admin.
-2. **Pill Inspector AI**: Sistem pendeteksi dan klasifikasi pil otomatis menggunakan Flask dan Computer Vision.
-3. **Fire Detection Monitoring**: Sistem pendeteksi dini kebakaran berbasis IoT hardware dan mobile app.
-4. **Sistem Presensi Siswa**: Aplikasi web presensi pintar menggunakan Laravel dan deteksi wajah YOLO.`;
+1. My Hiking App & Web Admin: Aplikasi booking pendakian gunung berbasis Flutter + web backend manajemen sistem dengan Laravel & REST API.
+2. HRIS - CORE: Sistem kepegawaian terpadu (presensi, rekrutmen, karir) berbasis Laravel & PostgreSQL.
+3. Dashboard Kepegawaian Human Capital: Dashboard analitik data karyawan InJourney Airports Regional 1 (Laravel & Alpine.js).
+4. Urshiports: Sistem manajemen & administrasi magang berbasis web di InJourney Airports.
+5. Buport (Sistem Arsip Pajak): Aplikasi web arsip bukti potong pajak vendor bandara.
+6. Sistem Presensi Siswa (SISMO): Web presensi cerdas dengan integrasi deteksi wajah YOLO.
+7. Pill Inspector AI & MyHiking RAG AI: Sistem AI cerdas berbasis Computer Vision dan RAG (Flask).
+8. Fire Detection Monitoring: Pendeteksi dini kebakaran berbasis IoT hardware sensor dan mobile app.`;
   }
 
-  if (msg.includes('sertifikat') || msg.includes('certificate') || msg.includes('lisensi')) {
-    return `📜 Dhiya Ulhaq memiliki sejumlah sertifikasi kredensial resmi, di antaranya:
-• Cloud & Gen AI di AWS
-• Pemrograman JavaScript
-• Database Design
-• Database Pemrograman with SQL`;
+  if (msg.includes('sertifikat') || msg.includes('certificate') || msg.includes('lisensi') || msg.includes('bnsp') || msg.includes('aws') || msg.includes('mtcna')) {
+    return `Sertifikasi Resmi Dhiya Ulhaq:
+
+• BNSP: Certificate of Competence - Intermediate Multimedia Designer
+• Kominfo VSGA: Intermediate Multimedia Designer
+• AWS: Cloud & Gen AI di AWS
+• MikroTik: MikroTik Certified Network Associate (MTCNA)
+• CourseStack, Inc: Certified Cybersecurity Educator Professional (CCEP)
+• Oracle Academy: Database Design & Database Programming with SQL
+• Dicoding: Pemrograman JavaScript, Python, dan SQL
+• Big Data: Certified Associate Big Data Analyst
+• Bahasa: TOEIC (Score: 510) & TOEFL ITP`;
   }
 
-  if (msg.includes('kontak') || msg.includes('contact') || msg.includes('email') || msg.includes('hire') || msg.includes('kerja') || msg.includes('hubungi') || msg.includes('linkedin')) {
-    return `📬 Anda dapat menghubungi Dhiya Ulhaq secara langsung melalui:
-• **Email**: [ulhaqjackyhaw@gmail.com](mailto:ulhaqjackyhaw@gmail.com)
-• **LinkedIn**: [linkedin.com/in/dhiyaulhaq100](https://www.linkedin.com/in/dhiyaulhaq100)
-• **GitHub**: [github.com/ulhaqjackyhaw](https://github.com/ulhaqjackyhaw)
-• **Instagram**: [@dhy_lhq](https://www.instagram.com/dhy_lhq)
+  if (msg.includes('kontak') || msg.includes('contact') || msg.includes('email') || msg.includes('wa') || msg.includes('hire') || msg.includes('hubungi') || msg.includes('telepon')) {
+    return `Kontak Dhiya Ulhaq:
 
-Beliau selalu antusias untuk mendiskusikan peluang kolaborasi baru!`;
+• WhatsApp: 089524174285 (https://wa.me/6289524174285)
+• Email: ulhaqjackyhaw@gmail.com
+• LinkedIn: https://www.linkedin.com/in/dhiyaulhaq100
+• GitHub: https://github.com/ulhaqjackyhaw
+• Lokasi: Semarang, Indonesia
+
+Terbuka untuk peluang kerja Full-Time, Internship, maupun proyek freelance kolaboratif.`;
   }
 
-  return `Halo! Saya **STAR-X AI**, asisten virtual Dhiya Ulhaq. 
+  return `Saya adalah STAR-X, asisten representasi teknis Dhiya Ulhaq. 
 
-Ada yang bisa saya bantu terkait profil, keahlian tech stack, portofolio proyek, atau kontak kolaborasi dengan Dhiya Ulhaq? Silakan pilih topik yang ingin Anda ketahui!`;
+Anda dapat menanyakan informasi seputar:
+• Profil & Pendidikan (Polines, IPK 3.91 Cumlaude)
+• Pengalaman Kerja (InJourney Airports & Bandara Soekarno-Hatta)
+• Keahlian & Tech Stack (Flutter, Laravel, Next.js, IoT, AI)
+• Portofolio Proyek (My Hiking, HRIS, Dashboard Kepegawaian, dll.)
+• Sertifikasi Resmi (BNSP, AWS, MikroTik, Oracle, Dicoding)
+• Kontak Langsung (Email & WhatsApp)`;
 }
 
 export async function POST(request) {
@@ -109,7 +187,7 @@ export async function POST(request) {
     const openaiKey = process.env.OPENAI_API_KEY;
     const groqKey = process.env.GROQ_API_KEY;
 
-    // 1. Opsi Gemini API (Sangat cepat & gratis)
+    // 1. Opsi Gemini API
     if (geminiKey) {
       try {
         const contents = [
@@ -127,8 +205,8 @@ export async function POST(request) {
             body: JSON.stringify({
               contents,
               generationConfig: {
-                temperature: 0.7,
-                maxOutputTokens: 800,
+                temperature: 0.5,
+                maxOutputTokens: 900,
               },
             }),
           }
@@ -165,8 +243,8 @@ export async function POST(request) {
         const completion = await openai.chat.completions.create({
           model: 'gpt-4o-mini',
           messages,
-          temperature: 0.7,
-          max_tokens: 800,
+          temperature: 0.5,
+          max_tokens: 900,
         });
 
         const replyText = completion.choices[0]?.message?.content;
@@ -197,7 +275,7 @@ export async function POST(request) {
               { role: 'system', content: SYSTEM_PROMPT },
               { role: 'user', content: message },
             ],
-            temperature: 0.7,
+            temperature: 0.5,
           }),
         });
 
@@ -215,7 +293,7 @@ export async function POST(request) {
       }
     }
 
-    // 4. Default: Respon Berbasis Pengetahuan Cerdas (Tanpa Error 500)
+    // 4. Fallback Cerdas
     const fallbackResponse = getSmartFallbackReply(message);
     return NextResponse.json({
       role: 'starx-ai',
@@ -227,10 +305,9 @@ export async function POST(request) {
     return NextResponse.json(
       {
         role: 'starx-ai',
-        content: 'Maaf, terjadi kesalahan teknis pada sistem AI. Silakan tanyakan hal lain atau hubungi Dhiya Ulhaq langsung via email.',
+        content: 'Terjadi kendala teknis saat memproses pesan. Silakan hubungi Dhiya Ulhaq langsung via email: ulhaqjackyhaw@gmail.com.',
       },
       { status: 200 }
     );
   }
 }
-

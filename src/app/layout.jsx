@@ -12,7 +12,7 @@ const inter = Inter({
   preload: true
 });
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://webportofolio-lq360ud6q-ulhaqjackyhaws-projects.vercel.app';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.dhiyaulhaq.web.id';
 
 export const metadata = {
   metadataBase: new URL(siteUrl),

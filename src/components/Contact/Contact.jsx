@@ -1,11 +1,65 @@
-import React from 'react';
+"use client"
+
+import React, { useState } from 'react';
 import { Button } from "@heroui/button";
 
 const Contact = ({ profile }) => {
   const githubUrl = profile?.github_url || 'https://github.com/ulhaqjackyhaw';
   const linkedinUrl = profile?.linkedin_url || 'https://www.linkedin.com/in/dhiyaulhaq100';
   const instagramUrl = profile?.instagram_url || 'https://www.instagram.com/dhy_lhq';
+  const email = profile?.email || 'ulhaqjackyhaw@gmail.com';
   const fullName = profile?.full_name || 'Dhiya Ulhaq';
+
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+  });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState({ type: null, message: '' });
+
+  const handleChange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setStatus({ type: null, message: '' });
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        setStatus({
+          type: 'success',
+          message: data.message || 'Pesan Anda berhasil dikirim ke email saya!',
+        });
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        throw new Error(data.message || 'Gagal mengirim pesan.');
+      }
+    } catch (err) {
+      setStatus({
+        type: 'error',
+        message: err.message || 'Terjadi kesalahan saat mengirim pesan. Silakan hubungi langsung ke email saya.',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   const socialLinks = [
     {
@@ -63,7 +117,35 @@ const Contact = ({ profile }) => {
             ))}
           </div>
         </div>
-        <form action="" method="POST" className="xl:pl-10 2xl:pl-20" aria-label="Formulir Kontak">
+
+        <form onSubmit={handleSubmit} className="xl:pl-10 2xl:pl-20" aria-label="Formulir Kontak">
+          {status.type === 'success' && (
+            <div className="mb-5 p-4 rounded-xl bg-emerald-500/15 border border-emerald-500/40 text-emerald-300 text-sm flex items-start gap-3">
+              <span className="text-xl">✅</span>
+              <div>
+                <p className="font-semibold">{status.message}</p>
+                <p className="text-xs text-emerald-400/80 mt-1">
+                  Saya akan membalas pesan Anda ke email yang Anda cantumkan secepatnya.
+                </p>
+              </div>
+            </div>
+          )}
+
+          {status.type === 'error' && (
+            <div className="mb-5 p-4 rounded-xl bg-red-500/15 border border-red-500/40 text-red-300 text-sm flex items-start gap-3">
+              <span className="text-xl">⚠️</span>
+              <div>
+                <p className="font-semibold">{status.message}</p>
+                <a 
+                  href={`mailto:${email}?subject=Collaboration%20Inquiry`} 
+                  className="text-xs text-sky-400 underline mt-1.5 block hover:text-sky-300"
+                >
+                  Kirim langsung via email ({email})
+                </a>
+              </div>
+            </div>
+          )}
+
           <div className="md:grid md:items-center md:grid-cols-2 md:gap-2">
             <div className="mb-4">
               <label htmlFor="name" className="label reveal-up">
@@ -73,11 +155,14 @@ const Contact = ({ profile }) => {
                 type="text" 
                 name="name" 
                 id="name" 
+                value={formData.name}
+                onChange={handleChange}
                 autoComplete="name" 
                 required 
                 placeholder="Nama Anda" 
                 aria-required="true"
-                className="text-field reveal-up" 
+                disabled={isSubmitting}
+                className="text-field reveal-up disabled:opacity-50" 
               />
             </div>
 
@@ -87,31 +172,50 @@ const Contact = ({ profile }) => {
                 type="email" 
                 name="email" 
                 id="email" 
+                value={formData.email}
+                onChange={handleChange}
                 autoComplete="email" 
                 required 
                 placeholder="emailanda@example.com" 
                 aria-required="true"
-                className="text-field reveal-up" 
+                disabled={isSubmitting}
+                className="text-field reveal-up disabled:opacity-50" 
               />
             </div>
           </div>
+
           <div className="mb-4">
             <label htmlFor="message" className="label reveal-up">Message</label>
             <textarea 
               id="message" 
               name="message" 
-              className="text-field resize-y min-h-32 max-h-80 reveal-up" 
+              value={formData.message}
+              onChange={handleChange}
+              className="text-field resize-y min-h-32 max-h-80 reveal-up disabled:opacity-50" 
               required 
               aria-required="true"
+              disabled={isSubmitting}
               placeholder="Tulis pesan atau proyek Anda di sini..."
             ></textarea>
           </div>
+
           <Button 
             type="submit" 
             aria-label="Kirim Pesan"
-            className="btn btn-primary bg-blue-600 [&]:max-w-full w-full justify-center reveal-up"
+            disabled={isSubmitting}
+            className="btn btn-primary bg-blue-600 [&]:max-w-full w-full justify-center reveal-up disabled:opacity-60 flex items-center gap-2"
           >
-            Submit
+            {isSubmitting ? (
+              <>
+                <svg className="animate-spin -ml-1 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                </svg>
+                Mengirim Pesan...
+              </>
+            ) : (
+              'Submit'
+            )}
           </Button>
         </form>
       </div>

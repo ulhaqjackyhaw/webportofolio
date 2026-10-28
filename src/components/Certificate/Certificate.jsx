@@ -6,8 +6,7 @@ import devopsImg from '@/assets/images/2.png';
 import jsImg from '@/assets/images/4.png';
 import beImg from '@/assets/images/3.png';
 
-
-const certificate = [
+const defaultCertificates = [
   {
     name: 'Cloud & Gen AI di AWS',
     imgSrc: jaringanImg,
@@ -26,7 +25,18 @@ const certificate = [
   },
 ];
 
-const Certificate = () => {
+const Certificate = ({ initialCertificates }) => {
+  const displayCertificates = React.useMemo(() => {
+    if (!initialCertificates || initialCertificates.length === 0) {
+      return defaultCertificates;
+    }
+
+    return initialCertificates.map((c) => ({
+      name: c.name,
+      imgSrc: c.img_src,
+    }));
+  }, [initialCertificates]);
+
   return (
     <section id="certificate" className="section overflow-hidden">
       <div className="container">
@@ -34,15 +44,13 @@ const Certificate = () => {
           Certif<span className="headline-5">icate</span>
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4 p-4">
-          {certificate.map(({
-            name, imgSrc
-          }, key) => (
+          {displayCertificates.map(({ name, imgSrc }, key) => (
             <CertificateCard key={key} name={name} imgSrc={imgSrc} />
           ))}
         </div>
       </div>
     </section>
   );
-}
+};
 
 export default Certificate;

@@ -8,17 +8,26 @@ import Contact from "@/components/Contact/Contact";
 import Footer from "@/components/Footer/Footer";
 import LenisComponent from '@/libs/LenisComponent';
 import Animation from '@/libs/Animation';
+import { getSkills, getProjects, getCertificates } from '@/libs/supabase/data';
 
-export default function Home() {
+export const revalidate = 0;
+
+export default async function Home() {
+  const [skills, projects, certificates] = await Promise.all([
+    getSkills(),
+    getProjects(),
+    getCertificates(),
+  ]);
+
   return (
     <LenisComponent>
       <Header />
       <main>
         <Hero />
         <About />
-        <Skill />
-        <Work />
-        <Certificate />
+        <Skill initialSkills={skills} />
+        <Work initialProjects={projects} />
+        <Certificate initialCertificates={certificates} />
         <Contact />
       </main>
       <Footer />

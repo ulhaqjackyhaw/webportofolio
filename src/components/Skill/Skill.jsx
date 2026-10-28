@@ -1,7 +1,7 @@
 import React from 'react';
 import SkillCard from './SkillCard';
 
-const skillItem = [
+const defaultSkillItem = [
   {
     title: "Programming Language",
     items: [
@@ -68,13 +68,34 @@ const skillItem = [
     title: "Package Manager",
     items: [
       { imgSrc: '/images/npm.svg', label: 'Node Package Manager', desc: 'Package Manager', progress: '28' },
-      { imgSrc: '/images/python.svg', label: 'pip', desc: 'Python Package Manager', progress: '30' }, // Tambahkan pip
-      { imgSrc: '/images/flutter.svg', label: 'Pub', desc: 'Dart/Flutter Package Manager', progress: '30' }, // Tambahkan Pub
+      { imgSrc: '/images/python.svg', label: 'pip', desc: 'Python Package Manager', progress: '30' },
+      { imgSrc: '/images/flutter.svg', label: 'Pub', desc: 'Dart/Flutter Package Manager', progress: '30' },
     ]
   },
 ];
 
-const Skill = () => {
+const Skill = ({ initialSkills }) => {
+  const displaySkills = React.useMemo(() => {
+    if (!initialSkills || initialSkills.length === 0) {
+      return defaultSkillItem;
+    }
+
+    return initialSkills.reduce((acc, row) => {
+      let group = acc.find((g) => g.title === row.category);
+      if (!group) {
+        group = { title: row.category, items: [] };
+        acc.push(group);
+      }
+      group.items.push({
+        imgSrc: row.img_src,
+        label: row.label,
+        desc: row.desc,
+        progress: String(row.progress ?? 0),
+      });
+      return acc;
+    }, []);
+  }, [initialSkills]);
+
   return (
     <section id="tools" className="section">
       <div className="container">
@@ -85,21 +106,27 @@ const Skill = () => {
           Advanced technology I use to create projects.
         </p>
         <div className="grid gap-3 grid-cols-[repeat(auto+fill,_minmax(250px,_1fr))]">
-          {skillItem.map((data, key) => (
+          {displaySkills.map((data, key) => (
             <div key={key}>
               <h5 className="text-lg mb-1 reveal-up">{data.title}</h5>
               <ul>
-                {data.items.map(({ imgSrc, label, desc, progress }, key) => (
-                  <SkillCard key={key} imgSrc={imgSrc} label={label} desc={desc} progress={progress} classes="reveal-up" />
+                {data.items.map(({ imgSrc, label, desc, progress }, idx) => (
+                  <SkillCard
+                    key={idx}
+                    imgSrc={imgSrc}
+                    label={label}
+                    desc={desc}
+                    progress={progress}
+                    classes="reveal-up"
+                  />
                 ))}
               </ul>
             </div>
-          ))
-          }
+          ))}
         </div>
       </div>
     </section>
   );
-}
+};
 
 export default Skill;

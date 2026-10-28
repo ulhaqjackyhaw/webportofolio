@@ -4,9 +4,9 @@ import project1 from "@/assets/images/project1.png";
 import project2 from "@/assets/images/project2.png";
 import project3 from "@/assets/images/project3.png";
 import project4 from "@/assets/images/cooming.png";
-import project5 from "@/assets/images/project5.png"
+import project5 from "@/assets/images/project5.png";
 
-const project = [
+const defaultProjects = [
   {
     type: "image",
     imgSrc: project2,
@@ -44,7 +44,22 @@ const project = [
   },
 ];
 
-const ProjectCard = () => {
+const ProjectCard = ({ initialProjects }) => {
+  const displayProjects = React.useMemo(() => {
+    if (!initialProjects || initialProjects.length === 0) {
+      return defaultProjects;
+    }
+
+    return initialProjects.map((p) => ({
+      type: p.type || 'image',
+      imgSrc: p.img_src,
+      title: p.title,
+      tags: p.tags || [],
+      projectLink: p.project_link,
+      jsonResponse: p.json_response,
+    }));
+  }, [initialProjects]);
+
   return (
     <section id="project" className="section">
       <div className="container">
@@ -52,15 +67,24 @@ const ProjectCard = () => {
           My <span className="headline-5">portfolio</span> highlights
         </h2>
         <div className="grid gap-x-4 gap-y-5 grid-cols-[repeat(auto-fill,_minmax(280px,_1fr))]">
-          {project.map(({
+          {displayProjects.map(({
             type, jsonResponse, imgSrc, title, tags, projectLink
           }, key) => (
-            <Project key={key} type={type} jsonResponse={jsonResponse} imgSrc={imgSrc} title={title} tags={tags} projectLink={projectLink} classes="reveal-up" />
+            <Project
+              key={key}
+              type={type}
+              jsonResponse={jsonResponse}
+              imgSrc={imgSrc}
+              title={title}
+              tags={tags}
+              projectLink={projectLink}
+              classes="reveal-up"
+            />
           ))}
         </div>
       </div>
     </section>
   );
-}
+};
 
 export default ProjectCard;

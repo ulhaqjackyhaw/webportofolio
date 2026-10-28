@@ -1,90 +1,257 @@
 "use client"
 
-import React from 'react';
-import Image from 'next/image'
-import Link from 'next/link'
-import Input from "@/components/Input"
+import React, { useState, useRef, useEffect } from 'react';
+import Link from 'next/link';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import SendRoundedIcon from '@mui/icons-material/SendRounded';
+import SmartToyOutlinedIcon from '@mui/icons-material/SmartToyOutlined';
+import PersonOutlineOutlinedIcon from '@mui/icons-material/PersonOutlineOutlined';
+
+const QUICK_PROMPTS = [
+  "👋 Siapa itu Dhiya Ulhaq?",
+  "💻 Apa saja tech stack & skill utamanya?",
+  "🚀 Ceritakan tentang proyek My Hiking",
+  "📱 Pengalaman di Mobile Development & IoT?",
+  "📬 Bagaimana cara mengontak Ulhaq untuk kerja sama?",
+];
+
+const INITIAL_MESSAGES = [
+  {
+    role: 'starx-ai',
+    content: `Halo! 👋 Saya **STAR-X AI**, asisten virtual pribadi **Dhiya Ulhaq**.\n\nSaya bisa membantu Anda mengetahui lebih banyak tentang keahlian software development, proyek portofolio, latar belakang pendidikan, hingga kontak kolaborasi dengan Dhiya Ulhaq.\n\nAda yang ingin Anda tanyakan? Anda juga bisa memilih saran pertanyaan di bawah!`,
+  },
+];
 
 const ChatClient = () => {
-    const [message, setMessage] = React.useState([]);
+  const [messages, setMessages] = useState(INITIAL_MESSAGES);
+  const [input, setInput] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const messagesEndRef = useRef(null);
+  const textareaRef = useRef(null);
 
-    const sendMessage = async ( input ) => {
-        const response = await fetch('/api/starx-ai', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ message: input }),
-        });
-    
-        const data = await response.json();
-        console.log(data)
-        setMessage([...message, { role: 'user', input }, { role: 'starx-ai', content: data.content }]);
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages, isLoading]);
+
+  const handleSend = async (messageText) => {
+    const textToSend = (messageText || input).trim();
+    if (!textToSend || isLoading) return;
+
+    const newMessages = [...messages, { role: 'user', content: textToSend }];
+    setMessages(newMessages);
+    setInput('');
+    setIsLoading(true);
+
+    try {
+      const response = await fetch('/api/starx-ai', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          message: textToSend,
+          history: newMessages.slice(-6),
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data?.content) {
+        setMessages((prev) => [
+          ...prev,
+          { role: 'starx-ai', content: data.content, engine: data.engine },
+        ]);
+      } else {
+        throw new Error('Tidak ada respon.');
+      }
+    } catch (err) {
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: 'starx-ai',
+          content: 'Maaf, terjadi kendala saat menghubungkan ke sistem AI. Anda bisa menghubungi Dhiya Ulhaq secara langsung melalui email: ulhaqjackyhaw@gmail.com.',
+        },
+      ]);
+    } finally {
+      setIsLoading(false);
+      setTimeout(() => {
+        textareaRef.current?.focus();
+      }, 100);
     }
+  };
 
-    return (
-        <div className="flex min-h-screen bg-white dark:bg-neutral-800">
-            {/* Sidebar */}
-            <aside className="fixed bottom-0 left-0 z-10 w-full bg-white border-t dark:bg-neutral-900 dark:border-neutral-700 flex justify-center lg:justify-start lg:items-start lg:flex-col lg:w-60 lg:h-screen lg:border-r lg:py-6 lg:px-4">
-                <Link
-                    href="/"
-                    className="m-2 lg:mx-0 py-2 px-4 w-fit text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700">
-                    Keluar
-                </Link>
-            </aside>
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSend();
+    }
+  };
 
-            {/* Konten utama */}
-            <main className="flex-1 flex flex-col items-center justify-center px-4 sm:px-6 lg:px-8 lg:ml-60">
-                <header className="w-full max-w-2xl text-center py-6 sm:py-8">
-                    <h1 className="text-3xl sm:text-4xl font-bold text-gray-800 dark:text-white">
-                        Welcome to STAR-X AI
-                    </h1>
-                    <p className="mt-2 text-base sm:text-lg text-gray-600 dark:text-neutral-400">
-                        Your AI-powered copilot for the web
-                    </p>
-                </header>
+  // Format teks sederhana (bold, list, bullet points)
+  const formatContent = (content) => {
+    return content.split('\n').map((line, idx) => {
+      // Bold formatter
+      const parts = line.split(/(\*\*.*?\*\*)/g).map((part, i) => {
+        if (part.startsWith('**') && part.endsWith('**')) {
+          return <strong key={i} className="text-white font-semibold">{part.slice(2, -2)}</strong>;
+        }
+        return part;
+      });
 
-                {/* Chat Box */}
-                <div className="w-full max-w-2xl flex flex-col space-y-4 bg-white dark:bg-neutral-800 p-4 sm:p-6 rounded-lg shadow-lg overflow-y-auto h-[70vh] border border-gray-200 dark:border-neutral-700">
-                    <ul className="space-y-6">
-                        {/* Pesan sistem */}
-                        <li className="max-w-lg flex gap-x-3 sm:gap-x-4 me-10">
-                            <Image
-                                className="inline-block w-9 h-9 sm:w-11 sm:h-11 rounded-full"
-                                width={50}
-                                height={50}
-                                src="https://images.unsplash.com/photo-1541101767792-f9b2b1c4f127?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&&auto=format&fit=facearea&facepad=3&w=300&h=300&q=80"
-                                alt="Avatar"
-                            />
-                            <div className="bg-white border border-gray-200 rounded-2xl p-4 space-y-3 dark:bg-neutral-900 dark:border-neutral-700">
-                                <h2 className="font-medium text-gray-800 dark:text-white">INFO!!</h2>
-                                <p className="text-sm text-gray-800 dark:text-white">
-                                    Fitur ini masih dalam tahap pengembangan
-                                </p>
-                            </div>
-                        </li>
+      return (
+        <span key={idx} className="block min-h-[1.25rem]">
+          {parts}
+        </span>
+      );
+    });
+  };
 
-                        {/* Pesan user */}
-                        <li className="flex ms-auto gap-x-3 sm:gap-x-4 items-end">
-                            <div className="grow text-end space-y-3">
-                                <div className="inline-block bg-blue-600 rounded-2xl p-4 shadow-sm max-w-sm">
-                                    <p className="text-sm text-white">Coming Soon</p>
-                                </div>
-                            </div>
-                            <span className="shrink-0 inline-flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gray-600">
-                                <span className="text-sm font-medium text-white leading-none">YOU</span>
-                            </span>
-                        </li>
-                    </ul>
-                </div>
-
-                {/* Input Chat */}
-                <div className="w-full max-w-2xl bg-white border-t border-gray-200 dark:bg-neutral-900 dark:border-neutral-700 p-4 sm:p-6 sticky bottom-0">
-                    <Input onSubmit={sendMessage}/>
-                </div>
-            </main>
+  return (
+    <div className="flex flex-col h-screen bg-zinc-950 text-zinc-100 overflow-hidden font-sans">
+      {/* Header Bar */}
+      <header className="h-16 border-b border-zinc-800/80 bg-zinc-900/70 backdrop-blur-md px-4 sm:px-6 flex items-center justify-between z-20 shrink-0">
+        <div className="flex items-center gap-3">
+          <Link
+            href="/"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium text-zinc-300 hover:text-white bg-zinc-800/80 hover:bg-zinc-700/80 transition-all border border-zinc-700/40"
+            title="Kembali ke Beranda Portofolio"
+          >
+            <ArrowBackIcon sx={{ fontSize: 18 }} />
+            <span className="hidden sm:inline">Portofolio</span>
+          </Link>
+          <div className="h-5 w-[1px] bg-zinc-800 hidden sm:block"></div>
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-sky-500 to-blue-600 grid place-items-center text-white shadow-lg shadow-sky-500/20">
+              <SmartToyOutlinedIcon sx={{ fontSize: 20 }} />
+            </div>
+            <div>
+              <div className="flex items-center gap-2">
+                <h1 className="text-sm sm:text-base font-bold text-white tracking-tight">STAR-X AI</h1>
+                <span className="text-[10px] px-2 py-0.5 rounded-full bg-sky-500/20 text-sky-400 font-semibold border border-sky-500/30">
+                  Virtual Copilot
+                </span>
+              </div>
+              <p className="text-[11px] text-zinc-400 flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                Representasi Asisten Dhiya Ulhaq
+              </p>
+            </div>
+          </div>
         </div>
-    );
-}
+
+        <Link
+          href="/#contact"
+          className="text-xs sm:text-sm px-3.5 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-medium transition-colors shadow-sm"
+        >
+          Hubungi Ulhaq
+        </Link>
+      </header>
+
+      {/* Chat Messages Body */}
+      <main className="flex-1 overflow-y-auto px-4 sm:px-6 py-6 space-y-6 max-w-4xl w-full mx-auto">
+        {messages.map((msg, index) => (
+          <div
+            key={index}
+            className={`flex items-start gap-3 sm:gap-4 ${
+              msg.role === 'user' ? 'justify-end' : 'justify-start'
+            }`}
+          >
+            {msg.role !== 'user' && (
+              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-sky-500 to-blue-600 grid place-items-center text-white shrink-0 shadow-md shadow-sky-500/20">
+                <SmartToyOutlinedIcon sx={{ fontSize: 20 }} />
+              </div>
+            )}
+
+            <div
+              className={`p-4 rounded-2xl max-w-[85%] sm:max-w-[75%] text-sm sm:text-base leading-relaxed ${
+                msg.role === 'user'
+                  ? 'bg-blue-600 text-white rounded-tr-sm shadow-md shadow-blue-600/20'
+                  : 'bg-zinc-900/90 text-zinc-200 border border-zinc-800 rounded-tl-sm shadow-lg'
+              }`}
+            >
+              <div className="space-y-1">
+                {formatContent(msg.content)}
+              </div>
+            </div>
+
+            {msg.role === 'user' && (
+              <div className="w-9 h-9 rounded-xl bg-zinc-800 border border-zinc-700/60 grid place-items-center text-zinc-300 shrink-0">
+                <PersonOutlineOutlinedIcon sx={{ fontSize: 20 }} />
+              </div>
+            )}
+          </div>
+        ))}
+
+        {isLoading && (
+          <div className="flex items-start gap-3 sm:gap-4">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-sky-500 to-blue-600 grid place-items-center text-white shrink-0">
+              <SmartToyOutlinedIcon sx={{ fontSize: 20 }} />
+            </div>
+            <div className="p-4 rounded-2xl rounded-tl-sm bg-zinc-900/90 border border-zinc-800 text-zinc-300 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-sky-400 animate-bounce"></span>
+              <span className="w-2 h-2 rounded-full bg-sky-400 animate-bounce [animation-delay:0.2s]"></span>
+              <span className="w-2 h-2 rounded-full bg-sky-400 animate-bounce [animation-delay:0.4s]"></span>
+              <span className="text-xs text-zinc-400 ml-1">STAR-X AI sedang berpikir...</span>
+            </div>
+          </div>
+        )}
+
+        <div ref={messagesEndRef} />
+      </main>
+
+      {/* Suggested Quick Prompts */}
+      <div className="px-4 sm:px-6 py-2 border-t border-zinc-900 bg-zinc-950/80 backdrop-blur-sm max-w-4xl w-full mx-auto">
+        <p className="text-[11px] text-zinc-500 mb-2 font-medium">Saran topik pertanyaan:</p>
+        <div className="flex gap-2 overflow-x-auto pb-1.5 scrollbar-none no-scrollbar">
+          {QUICK_PROMPTS.map((prompt, idx) => (
+            <button
+              key={idx}
+              onClick={() => handleSend(prompt)}
+              disabled={isLoading}
+              className="text-xs bg-zinc-900 hover:bg-zinc-800 hover:text-sky-300 border border-zinc-800 hover:border-sky-500/40 text-zinc-300 px-3 py-1.5 rounded-full shrink-0 transition-all cursor-pointer disabled:opacity-50"
+            >
+              {prompt}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Input Field Section */}
+      <footer className="p-4 sm:p-5 border-t border-zinc-800/80 bg-zinc-900/90 backdrop-blur-md max-w-4xl w-full mx-auto shrink-0">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSend();
+          }}
+          className="relative flex items-center"
+        >
+          <input
+            ref={textareaRef}
+            type="text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            onKeyDown={handleKeyDown}
+            placeholder="Ketik pertanyaan untuk STAR-X AI... (tekan Enter)"
+            disabled={isLoading}
+            className="w-full bg-zinc-950/80 text-zinc-100 placeholder:text-zinc-500 text-sm sm:text-base rounded-xl py-3.5 pl-4 pr-14 border border-zinc-700/60 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 transition-all disabled:opacity-50"
+          />
+          <button
+            type="submit"
+            disabled={!input.trim() || isLoading}
+            aria-label="Kirim pesan"
+            className="absolute right-2 p-2 rounded-lg bg-blue-600 hover:bg-blue-500 disabled:bg-zinc-800 text-white disabled:text-zinc-500 transition-all shadow-sm flex items-center justify-center cursor-pointer disabled:cursor-not-allowed"
+          >
+            <SendRoundedIcon sx={{ fontSize: 20 }} />
+          </button>
+        </form>
+        <p className="text-center text-[11px] text-zinc-500 mt-2">
+          STAR-X AI adalah asisten virtual interaktif untuk portofolio Dhiya Ulhaq.
+        </p>
+      </footer>
+    </div>
+  );
+};
 
 export default ChatClient;

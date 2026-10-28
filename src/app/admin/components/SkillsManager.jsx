@@ -182,11 +182,10 @@ export default function SkillsManager() {
 
       {statusMsg.text && (
         <div
-          className={`mb-4 p-3 rounded-lg text-sm border ${
-            statusMsg.type === 'error'
-              ? 'bg-red-950/60 border-red-800 text-red-300'
-              : 'bg-emerald-950/60 border-emerald-800 text-emerald-300'
-          }`}
+          className={`mb-4 p-3 rounded-lg text-sm border ${statusMsg.type === 'error'
+            ? 'bg-red-950/60 border-red-800 text-red-300'
+            : 'bg-emerald-950/60 border-emerald-800 text-emerald-300'
+            }`}
         >
           {statusMsg.text}
         </div>

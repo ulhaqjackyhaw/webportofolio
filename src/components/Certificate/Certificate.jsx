@@ -10,18 +10,22 @@ const defaultCertificates = [
   {
     name: 'Cloud & Gen AI di AWS',
     imgSrc: jaringanImg,
+    certificateLink: '',
   },
   {
     name: 'Pemrograman JavaScript',
     imgSrc: devopsImg,
+    certificateLink: '',
   },
   {
     name: 'Database Design',
     imgSrc: jsImg,
+    certificateLink: '',
   },
   {
     name: 'Database Pemrograman with SQL',
     imgSrc: beImg,
+    certificateLink: '',
   },
 ];
 
@@ -34,6 +38,7 @@ const Certificate = ({ initialCertificates }) => {
     return initialCertificates.map((c) => ({
       name: c.name,
       imgSrc: c.img_src,
+      certificateLink: c.certificate_link || c.link || '',
     }));
   }, [initialCertificates]);
 
@@ -44,8 +49,13 @@ const Certificate = ({ initialCertificates }) => {
           Certif<span className="headline-5">icate</span>
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 gap-4 p-4">
-          {displayCertificates.map(({ name, imgSrc }, key) => (
-            <CertificateCard key={key} name={name} imgSrc={imgSrc} />
+          {displayCertificates.map(({ name, imgSrc, certificateLink }, key) => (
+            <CertificateCard
+              key={key}
+              name={name}
+              imgSrc={imgSrc}
+              certificateLink={certificateLink}
+            />
           ))}
         </div>
       </div>

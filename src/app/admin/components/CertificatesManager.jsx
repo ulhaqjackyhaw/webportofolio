@@ -20,6 +20,7 @@ export default function CertificatesManager() {
   const [formData, setFormData] = useState({
     name: '',
     img_src: '',
+    certificate_link: '',
     sort_order: 0,
   });
 
@@ -95,6 +96,7 @@ export default function CertificatesManager() {
     setFormData({
       name: '',
       img_src: '',
+      certificate_link: '',
       sort_order: certificates.length + 1,
     });
     setStatusMsg({ type: '', text: '' });
@@ -106,6 +108,7 @@ export default function CertificatesManager() {
     setFormData({
       name: item.name,
       img_src: item.img_src || '',
+      certificate_link: item.certificate_link || '',
       sort_order: item.sort_order || 0,
     });
     setStatusMsg({ type: '', text: '' });
@@ -208,6 +211,20 @@ export default function CertificatesManager() {
                 </div>
                 <div className="p-4">
                   <h3 className="font-semibold text-zinc-100 text-base">{cert.name}</h3>
+                  {cert.certificate_link ? (
+                    <a
+                      href={cert.certificate_link}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-xs text-sky-400 hover:underline truncate block mt-2"
+                    >
+                      Buka Link Sertifikat &rarr;
+                    </a>
+                  ) : (
+                    <span className="text-xs text-zinc-500 italic block mt-1">
+                      (Belum ada link redirect)
+                    </span>
+                  )}
                 </div>
               </div>
 
@@ -259,6 +276,22 @@ export default function CertificatesManager() {
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   className="w-full px-3 py-2 bg-zinc-800 border border-zinc-700 rounded-xl text-zinc-100 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500"
                 />
+              </div>
+
+              <div>
+                <label className="block text-xs font-medium text-zinc-300 mb-1">
+                  Link Redirect Sertifikat (URL Kredensial / Verifikasi)
+                </label>
+                <input
+                  type="url"
+                  placeholder="https://... (contoh: link Coursera, Dicoding, Google Drive, AWS)"
+                  value={formData.certificate_link}
+                  onChange={(e) => setFormData({ ...formData, certificate_link: e.target.value })}
+                  className="w-full px-3 py-2 bg-zinc-800 border border-zinc-700 rounded-xl text-zinc-100 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500"
+                />
+                <p className="text-[11px] text-zinc-500 mt-1">
+                  Ketika card sertifikat di halaman depan diklik, pengunjung akan diarahkan ke link ini.
+                </p>
               </div>
 
               <div>
@@ -343,4 +376,3 @@ export default function CertificatesManager() {
     </div>
   );
 }
-
